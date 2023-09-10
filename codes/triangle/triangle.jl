@@ -28,15 +28,15 @@ function plottri(fn,eigval)
     for foci in fn
         scatter!([real(foci)],[imag(foci)],color="blue",label="Point")
     end
-    eig=eigval[1]
-    push!(eig,eig[1])
-    plot!(real.(eig),imag.(eig), lw=2,color="red")
-    for eig in eigval[2:end]
+    for eig in eigval[begin:end-1]
         push!(eig,eig[1])
         plot!(real.(eig),imag.(eig), lw=2,color="grey")
         plot!(axis=false,grid=false)
-        savefig(plt,"output.png")
     end
+    eig=eigval[end]
+    push!(eig,eig[1])
+    plot!(real.(eig),imag.(eig), lw=2,color="red")
+    savefig(plt,"output.png")
 end
 
 function main()
